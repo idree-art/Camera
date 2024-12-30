@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camera Phishing</title>
+</head>
+<body>
+    <h1>Welcome to the Camera Test</h1>
+    <video id="video" width="640" height="480" autoplay></video>
+    <button id="capture">Capture Photo</button>
+    <canvas id="canvas" width="640" height="480"></canvas>
+    <script>
+        // Get access to the camera
+        const video = document.getElementById('video');
+        const canvas = document.getElementById('canvas');
+        const context = canvas.getContext('2d');
+        const captureButton = document.getElementById('capture');
+
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(function(stream) {
+                video.srcObject = stream;
+            })
+            .catch(function(err0r) {
+                console.log("Something went wrong!");
+            });
+
+        captureButton.addEventListener('click', function() {
+            context.drawImage(video, 0, 0, 640, 480);
+        });
+    </script>
+</body>
+</html>
